@@ -1,0 +1,32 @@
+/* HUMANS.TXT - Evan DJEFIE Portfolio */
+
+/* TEAM */
+Developer: Evan DJEFIE
+Email: evanform225@gmail.com
+LinkedIn: https://linkedin.com/in/evan-djefie
+GitHub: https://github.com/evandjefie
+YouTube: https://www.youtube.com/@evandjefie1007
+
+/* SITE */
+Name: Evan DJEFIE - Portfolio & Services
+Description: Portfolio personnel et services professionnels d'Evan DJEFIE
+Language: French
+Charset: UTF-8
+
+/* TECHNOLOGIES */
+Frontend: React, TypeScript, Tailwind CSS, GSAP, Next.js
+Mobile: Flutter, React Native
+Backend: Laravel, Node.js, Python
+Database: PostgreSQL, MySQL, MongoDB, Firebase
+DevOps: Docker, Git, CI/CD, AWS, Vercel
+Design: Figma, UI/UX Design
+
+/* SERVICES */
+- Edjverse: Agence digitale (création de marque, transformation digitale, solutions high-tech)
+- ViZup: Accélérateur MVP (30 jours)
+- DIAM: Solutions digitales innovantes
+- AssistCabinet: Solutions pour cabinets professionnels
+
+/* DATES */
+Updated: 2026-02-16
+Standards: HTML5, CSS3, ES6+

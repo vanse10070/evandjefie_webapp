@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: 
+
+# Paths to sitemap
+Sitemap: https://evanform.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Comment: SEO Optimized robots.txt for evanform.com
+# Allow search engines to index all pages
+# Services and Offers pages
+Allow: /edjverse
+Allow: /vizup
+Allow: /diam
+Allow: /cabinet
+Allow: /portfolio
+Allow: /about
+Allow: /
+
+# Disallow specific paths if needed (currently none)
