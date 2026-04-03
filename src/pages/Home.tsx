@@ -1,36 +1,129 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout, Palette, Zap, Globe, Cpu } from 'lucide-react';
 import Portfolio from '../components/Portfolio';
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
 import Footer from '../components/Footer';
+import Timeline from '../components/Timeline';
+import WorkProcess from '../components/WorkProcess';
+import { useState } from 'react';
 
 const Home = () => {
     const { isDark, toggleTheme } = useTheme();
+    const [journeyType, setJourneyType] = useState<'work' | 'education'>('work');
 
     const expertise = [
         {
-            icon: <Code className="w-6 h-6" />,
-            title: "Fullstack Development",
-            description: "Développement web complet avec React/NextJs/TypeScript, Flutter et Laravel"
+            icon: <Globe className="w-6 h-6" />,
+            title: "Landing Page & Site Vitrine",
+            description: "Création de sites performants pour entrepreneurs et entreprises pour booster votre présence en ligne."
         },
         {
-            icon: <Layout className="w-6 h-6" />,
-            title: "UI/UX Design",
-            description: "Interfaces modernes et accessibles en utilisant Tailwind CSS et design systems"
+            icon: <Cpu className="w-6 h-6" />,
+            title: "App Web & Mobile sur mesure",
+            description: "Développement d'applications complexes et personnalisées répondant à vos besoins métiers spécifiques."
         },
         {
-            icon: <Briefcase className="w-6 h-6" />,
-            title: "DevOps & Deployment",
-            description: "Déploiement, CI/CD et gestion d'infrastructure pour vos applications"
+            icon: <Palette className="w-6 h-6" />,
+            title: "Identité Visuelle & Print",
+            description: "Conception de logos, affiches, supports print et identités visuelles fortes pour votre marque."
+        },
+        {
+            icon: <Zap className="w-6 h-6" />,
+            title: "Automatisation & Bots",
+            description: "Optimisation de vos processus avec des outils comme n8n et des bots personnalisés (OpenClaw)."
         }
     ];
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const experienceData = [
+        {
+            title: "Front End Lead",
+            company: "LeyCom · CDD",
+            period: "Août 2025 - Janv. 2026 · 6 mois",
+            location: "Abidjan, Côte d’Ivoire · Hybride",
+            description: [
+                "Développement Interface Utilisateur (Client) : Conception d’une application web complexe intégrant des parcours d’apprentissage interactifs, des systèmes d’évaluation dynamiques et un tableau de bord de suivi des performances.",
+                "Qualité & Fiabilité : Mise en place d’une stratégie de tests complète (unitaires, intégration, E2E) ainsi que de tests non-fonctionnels (accessibilité, performance via Lighthouse).",
+                "Infrastructure & DevOps : Configuration et déploiement sur VPS, environnement automatisé avec Dokploy et pipelines CI/CD.",
+                "Monitoring & Analytics : Intégration de Sentry, Grafana, Google Analytics 4 pour le suivi des erreurs et performances."
+            ],
+            skills: ["React.js", "TypeScript", "Tailwind CSS", "Sentry", "CI/CD", "Dokploy"]
+        },
+        {
+            title: "Full-stack Developer",
+            company: "Freelance",
+            period: "Nov. 2021 - Aujourd’hui · 4 ans 6 mois",
+            location: "À distance",
+            description: [
+                "Conception et développement d’applications web/mobile (Landing page, SaaS, e-commerce).",
+                "Conception d'identité visuelle, d'affiches, logos et calendrier éditorial.",
+                "Accompagnement produit (définition MVP, tests utilisateurs, amélioration UX)."
+            ],
+            skills: ["Flutter", "React.js", "Node.js", "Laravel", "UI/UX Design"]
+        },
+        {
+            title: "Développeur web front-end",
+            company: "EVEN MEDIA INTERACTIVE",
+            period: "Mars 2023 - Sept. 2023 · 7 mois",
+            location: "Abidjan, Côte d’Ivoire · Sur site",
+            description: [
+                "Développement d'interfaces web responsives et performantes.",
+                "Collaboration avec l'équipe design pour l'intégration de maquettes.",
+                "Optimisation du SEO et des performances front-end."
+            ],
+            skills: ["React.js", "JavaScript", "CSS3", "HTML5"]
+        },
+        {
+            title: "Ingénieur DevOps",
+            company: "INSTITUT CERCO INTERNATIONAL · Temps plein",
+            period: "Janv. 2021 - Août 2022 · 1 an 8 mois",
+            location: "Abidjan, Côte d’Ivoire · Sur site",
+            description: [
+                "Déploiement automatisé d’un serveur de monitoring AWS EC2 (RAM, DISK, CPU).",
+                "Création de scripts Bash/Python pour l’automatisation des tâches récurrentes.",
+                "Gestion de l'infrastructure serveur et maintenance préventive."
+            ],
+            skills: ["AWS", "Bash", "Python", "Monitoring", "Docker"]
+        }
+    ];
+
+    const educationData = [
+        {
+            title: "Master en informatique, Ingénierie informatique",
+            company: "Institut International Polytechnique des Élites d'Abidjan",
+            period: "Janv. 2025 – 2027",
+            location: "Abidjan, Côte d’Ivoire",
+            description: [
+                "Spécialisation en architecture logicielle et ingénierie de données.",
+                "Conception de systèmes complexes et gestion de projets innovants."
+            ]
+        },
+        {
+            title: "Licence professionnelle, Computer Science",
+            company: "INSTITUT CERCO INTERNATIONAL",
+            period: "Nov. 2020 – Juin 2021",
+            location: "Abidjan, Côte d’Ivoire",
+            description: [
+                "Approfondissement des concepts d'algorithmique et de développement logiciel.",
+                "Projets pratiques sur le développement web et mobile."
+            ]
+        },
+        {
+            title: "Brevet de technicien supérieur (BTS), Programmation informatique",
+            company: "HETEC Abidjan",
+            period: "2019 – 2020",
+            location: "Abidjan, Côte d’Ivoire",
+            description: [
+                "Bases de la programmation, bases de données et maintenance informatique.",
+                "Développement d'applications de gestion élémentaires."
+            ]
+        }
+    ];
 
     return (
         <div className={`${isDark ? 'dark' : ''}`}>
@@ -78,22 +171,20 @@ const Home = () => {
                                 </a>
                             </div>
 
-                            <a href='#services-offers' className="bg-[#19a89e] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#148278] transition-colors inline-flex items-center">
-
+                            <a href='#book-meeting' className="bg-[#19a89e] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#148278] transition-colors inline-flex items-center">
                                 Démarrer un Projet
-
                                 <ArrowRight className="w-5 h-5 ml-2" />
                             </a>
                         </div>
                     </div>
 
                     {/* Expertise Section */}
-                    <div className={`py-20 px-4 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>
+                    <div id="expertise" className={`py-20 px-4 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>
                         <div className="max-w-6xl mx-auto">
                             <h2 className={`text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                Mon Expertise
+                                Mes Services
                             </h2>
-                            <div className="grid md:grid-cols-3 gap-8">
+                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                                 {expertise.map((exp, idx) => (
                                     <div key={idx} className={`p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:shadow-xl'
                                         }`}>
@@ -111,7 +202,7 @@ const Home = () => {
                     </div>
 
                     {/* Portfolio Section */}
-                    <div className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+                    <div id="portfolio" className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
                         <div className="max-w-6xl mx-auto">
                             {/* <h2 className={`text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
                                 // Mes Réalisations
@@ -122,85 +213,83 @@ const Home = () => {
 
 
                     {/* Mon Parcours */}
-
-
-                    {/* Services / Offers Preview */}
-                    <div className={`py-20 px-4 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>
+                    <div id="parcours" className="py-20 px-4">
                         <div className="max-w-6xl mx-auto">
-                            <h2 id="services-offers" className={`text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                Mes Offres
-                            </h2>
-                            <div className="grid md:grid-cols-4 gap-6">
-                                <Link to="/edjverse" className="group">
-                                    <div className={`p-6 rounded-xl border-2 h-full transition-all duration-300 transform hover:-translate-y-1 ${isDark
-                                        ? 'bg-gray-800 border-[#19a89e]/50 hover:border-[#19a89e]'
-                                        : 'bg-white border-gray-200 hover:border-[#19a89e]'
-                                        }`}>
-                                        <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                            Edjverse
-                                        </h3>
-                                        <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                            Agence digitale de confiance
-                                        </p>
-                                        <div className="flex items-center text-[#19a89e] text-sm font-semibold">
-                                            Découvrir <ArrowRight className="w-4 h-4 ml-2" />
-                                        </div>
-                                    </div>
-                                </Link>
+                            <div className="flex justify-center mb-12">
+                                <div className={`inline-flex p-1 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                                    <button
+                                        onClick={() => setJourneyType('work')}
+                                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                                            journeyType === 'work'
+                                            ? 'bg-[#19a89e] text-white shadow-lg'
+                                            : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                    >
+                                        Expérience Pro
+                                    </button>
+                                    <button
+                                        onClick={() => setJourneyType('education')}
+                                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                                            journeyType === 'education'
+                                            ? 'bg-[#19a89e] text-white shadow-lg'
+                                            : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                    >
+                                        Formation
+                                    </button>
+                                </div>
+                            </div>
 
-                                <Link to="/vizup" className="group">
-                                    <div className={`p-6 rounded-xl border-2 h-full transition-all duration-300 transform hover:-translate-y-1 ${isDark
-                                        ? 'bg-gray-800 border-blue-500/50 hover:border-blue-500'
-                                        : 'bg-white border-gray-200 hover:border-blue-500'
-                                        }`}>
-                                        <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                            ViZup
-                                        </h3>
-                                        <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                            L'Accélérateur MVP
-                                        </p>
-                                        <div className="flex items-center text-blue-500 text-sm font-semibold">
-                                            Découvrir <ArrowRight className="w-4 h-4 ml-2" />
-                                        </div>
-                                    </div>
-                                </Link>
+                            {journeyType === 'work' ? (
+                                <Timeline 
+                                    isDark={isDark} 
+                                    title="Mon Parcours Pro" 
+                                    subtitle="Une aventure passionnante jalonnée de défis techniques et de réalisations concrètes."
+                                    items={experienceData}
+                                    type="work"
+                                />
+                            ) : (
+                                <Timeline 
+                                    isDark={isDark} 
+                                    title="Parcours Académique" 
+                                    subtitle="Ma formation et mes diplômes qui ont forgé mes compétences théoriques."
+                                    items={educationData}
+                                    type="education"
+                                />
+                            )}
+                        </div>
+                    </div>
 
-                                <Link to="/diam" className="group">
-                                    <div className={`p-6 rounded-xl border-2 h-full transition-all duration-300 transform hover:-translate-y-1 ${isDark
-                                        ? 'bg-gray-800 border-purple-500/50 hover:border-purple-500'
-                                        : 'bg-white border-gray-200 hover:border-purple-500'
-                                        }`}>
-                                        <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                            DIAM
-                                        </h3>
-                                        <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                            Digital In A Month
-                                        </p>
-                                        <div className="flex items-center text-purple-500 text-sm font-semibold">
-                                            Découvrir <ArrowRight className="w-4 h-4 ml-2" />
-                                        </div>
-                                    </div>
-                                </Link>
+                    {/* Processus de Travail */}
+                    <div id="processus">
+                        <WorkProcess isDark={isDark} />
+                    </div>
 
-                                <Link to="/cabinet" className="group">
-                                    <div className={`p-6 rounded-xl border-2 h-full transition-all duration-300 transform hover:-translate-y-1 ${isDark
-                                        ? 'bg-gray-800 border-green-500/50 hover:border-green-500'
-                                        : 'bg-white border-gray-200 hover:border-green-500'
-                                        }`}>
-                                        <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                            Cabinet
-                                        </h3>
-                                        <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                            Solutions pour Cabinets
-                                        </p>
-                                        <div className="flex items-center text-green-500 text-sm font-semibold">
-                                            Découvrir <ArrowRight className="w-4 h-4 ml-2" />
-                                        </div>
-                                    </div>
-                                </Link>
+                    {/* Booking Section */}
+                    <div id="book-meeting" className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center mb-12">
+                                <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
+                                    Démarrer un Projet
+                                </h2>
+                                <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                                    Réservez un créneau de 30 minutes pour discuter de votre projet et le structurer ensemble.
+                                </p>
+                            </div>
+                            
+                            <div className={`w-full h-[700px] rounded-3xl overflow-hidden shadow-2xl border ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
+                                <iframe 
+                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssM2lZqLpX7S_Qn6f6V_hZ5P6J3B6_G1T-Z7hZ_6U?gv=true" 
+                                    style={{ border: 0 }} 
+                                    width="100%" 
+                                    height="100%" 
+                                    frameBorder="0"
+                                    title="Google Calendar Booking"
+                                />
                             </div>
                         </div>
                     </div>
+
 
                     {/* CTA Section */}
                     <div className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
