@@ -1,17 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout, Palette, Zap, Globe, Cpu, Server } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout, Palette, Zap, Globe, Cpu, Server, Facebook } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Portfolio from '../components/Portfolio';
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
 import Footer from '../components/Footer';
 import Timeline from '../components/Timeline';
 import WorkProcess from '../components/WorkProcess';
-import { useState } from 'react';
 
 const Home = () => {
     const { isDark, toggleTheme } = useTheme();
     const [journeyType, setJourneyType] = useState<'work' | 'education'>('work');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        
+        // Dynamic SEO Update
+        document.title = "Evan DJEFIE | Développeur Fullstack, DevOps & UI/UX Designer";
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Portfolio d\'Evan DJEFIE - Expert en solutions digitales, automatisation CI/CD, et développement d\'applications sur mesure (React, Flutter, Laravel).');
+        }
+    }, []);
 
     const expertise = [
         {
@@ -40,10 +51,6 @@ const Home = () => {
             description: "Automatisation du process de dev au déploiement (CI/CD, Tests) et gestion d'infrastructure (Terraform, Ansible) sur VPS/Cloud."
         }
     ];
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
 
     const experienceData = [
         {
@@ -146,30 +153,69 @@ const Home = () => {
                     {/* Hero Section */}
                     <div className="pt-32 pb-20 px-4">
                         <div className="max-w-4xl mx-auto text-center">
-                            <div className={`w-40 h-40 mx-auto rounded-full p-1 mb-8 shadow-xl ${isDark ? 'bg-gradient-to-br from-[#19a89e] to-[#014a74]' : 'bg-white'}`}>
-                                <img
-                                    src="/src/assets/evandjefie.jpg"
-                                    alt="Profile"
-                                    className="w-full h-full rounded-full object-cover border-4 border-white dark:border-gray-800"
-                                />
-                            </div>
-                            <h1 className={`text-6xl font-bold mb-4 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8 }}
+                                className="relative mb-1"
+                            >
+                                {/* Banner Block (Behind Photo) */}
+                                <div className={`w-full max-w-2xl mx-auto h-48 rounded-3xl overflow-hidden shadow-2xl relative ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                                    <div className={`absolute inset-0 opacity-40 ${isDark ? 'bg-[radial-gradient(#19a89e_1px,transparent_1px)]' : 'bg-[radial-gradient(#014a74_1px,transparent_1px)]'} [background-size:20px:20px]`}></div>
+                                    <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? 'from-[#19a89e]/20 to-[#014a74]/40' : 'from-[#19a89e]/10 to-[#014a74]/20'}`}></div>
+                                    <img
+                                        src="/edjverse.svg"
+                                        alt="Banner Decoration"
+                                        className="absolute right-[-10%] top-[-20%] w-64 h-64 transform pointer-events-none"
+                                    />
+                                    {/* <img
+                                        src="/edjverse.svg"
+                                        alt="Banner Decoration"
+                                        className="absolute left-[-5%] bottom-[-10%] w-48 h-48 opacity-10 transform -rotate-12 pointer-events-none"
+                                    /> */}
+                                </div>
+
+                                {/* Profile Photo */}
+                                <motion.div 
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ delay: 0.3, duration: 0.5 }}
+                                    className={`w-40 h-40 mx-auto -mt-20 relative z-10 rounded-full p-1 shadow-2xl ${isDark ? 'bg-gradient-to-br from-[#19a89e] to-[#014a74]' : 'bg-white'}`}
+                                >
+                                    <img
+                                        src="/evandjefie.jpg"
+                                        alt="Evan DJEFIE - Développeur Fullstack"
+                                        className="w-full h-full rounded-full object-cover border-4 border-white dark:border-gray-800"
+                                    />
+                                    {/* <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-white dark:border-gray-800 rounded-full"></div> */}
+                                </motion.div>
+                            </motion.div>
+
+                            <motion.h1 
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.5 }}
+                                className={`text-3xl font-bold mb-1 ${isDark ? 'text-white' : 'text-[#014a74]'}`}
+                            >
                                 Evan DJEFIE
-                            </h1>
-                            <p className={`text-2xl mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                            </motion.h1>
+                            <p className={`text-xl mb-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                                 Fullstack Developer | DevOps | UI/UX Designer
                             </p>
-                            <p className={`text-lg mb-8 max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                            <p className={`text-lg mb-2 max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                                 Je crée des solutions digitales innovantes qui transforment les idées en produits performants. Spécialisé dans le développement web moderne et l'automatisation.
                             </p>
 
                             {/* Social Links */}
                             <div className="flex justify-center gap-4 mb-12">
+                                <a href="https://linkedin.com/in/evan-djefie" target="_blank" rel="noopener noreferrer" className={`p-4 rounded-full transition-all transform hover:scale-110 ${isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-[#014a74] hover:bg-gray-200'}`}>
+                                    <Linkedin size={24} />
+                                </a>
                                 <a href="https://github.com/evandjefie" target="_blank" rel="noopener noreferrer" className={`p-4 rounded-full transition-all transform hover:scale-110 ${isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-[#014a74] hover:bg-gray-200'}`}>
                                     <Github size={24} />
                                 </a>
-                                <a href="https://linkedin.com/in/evan-djefie" target="_blank" rel="noopener noreferrer" className={`p-4 rounded-full transition-all transform hover:scale-110 ${isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-[#0077b5] hover:bg-gray-200'}`}>
-                                    <Linkedin size={24} />
+                                <a href="https://facebook.com/evandjefie1007" target="_blank" rel="noopener noreferrer" className={`p-4 rounded-full transition-all transform hover:scale-110 ${isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-[#0077b5] hover:bg-gray-200'}`}>
+                                    <Facebook size={24} />
                                 </a>
                                 <a href="mailto:evanform225@gmail.com" className={`p-4 rounded-full transition-all transform hover:scale-110 ${isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-red-500 hover:bg-gray-200'}`}>
                                     <Mail size={24} />

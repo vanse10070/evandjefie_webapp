@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Linkedin, Github, Mail, Youtube } from 'lucide-react';
+import { Menu, X, Linkedin, Github, Mail, Youtube, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import logo from '../assets/edjverse.svg';
 
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOffersOpen, setIsOffersOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -21,10 +23,16 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
   }, []);
 
   const navItems = [
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Parcours', href: '#parcours' },
-    { label: 'Réserver', href: '#book-meeting' },
+    { label: 'Accueil', href: '/' },
+    { label: 'À propos', href: '/about' },
+    { label: 'Portfolio', href: '/portfolio' },
+  ];
+
+  const offers = [
+    { label: 'Edjverse', href: '/edjverse' },
+    { label: 'ViZup', href: '/vizup' },
+    { label: 'DIAM', href: '/diam' },
+    { label: 'AssistCabinet', href: '/cabinet' },
   ];
 
   const socialLinks = [
@@ -57,15 +65,37 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center justify-center flex-1">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className={`hover:text-[#19a89e] transition-colors mx-4 ${isDark ? 'text-white' : 'text-gray-800'
                   }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
+
+            {/* Offers Dropdown */}
+            <div className="relative group mx-4">
+              <button className={`hover:text-[#19a89e] transition-colors flex items-center ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>
+                Offres
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              <div className={`absolute left-0 mt-0 w-48 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 ${isDark ? 'bg-gray-800' : 'bg-white'
+                }`}>
+                {offers.map((offer) => (
+                  <Link
+                    key={offer.label}
+                    to={offer.href}
+                    className={`block px-4 py-2 first:rounded-t-lg last:rounded-b-lg hover:text-[#19a89e] transition-colors ${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-800 hover:bg-gray-100'
+                      }`}
+                  >
+                    {offer.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Social Links & Theme Toggle */}
@@ -116,16 +146,46 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
           <div className={`md:hidden mt-4 py-4 ${isDark ? 'bg-gray-800' : 'bg-white'
             } rounded-lg shadow-lg`}>
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className={`block py-2 px-4 hover:text-[#19a89e] transition-colors ${isDark ? 'text-white' : 'text-gray-800'
                   }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
+
+            {/* Mobile Offers */}
+            <div className="border-t" style={{ borderColor: isDark ? '#4b5563' : '#e5e7eb' }}>
+              <button
+                onClick={() => setIsOffersOpen(!isOffersOpen)}
+                className={`w-full text-left py-2 px-4 hover:text-[#19a89e] transition-colors flex items-center justify-between ${isDark ? 'text-white' : 'text-gray-800'
+                  }`}
+              >
+                Offres
+                <ChevronDown className={`w-4 h-4 transition-transform ${isOffersOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isOffersOpen && (
+                <div className={`pl-4 ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
+                  {offers.map((offer) => (
+                    <Link
+                      key={offer.label}
+                      to={offer.href}
+                      className={`block py-2 px-4 hover:text-[#19a89e] transition-colors ${isDark ? 'text-white' : 'text-gray-800'
+                        }`}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsOffersOpen(false);
+                      }}
+                    >
+                      {offer.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </nav>
