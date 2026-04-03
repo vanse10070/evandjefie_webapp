@@ -14,14 +14,14 @@ interface ProcessStep {
 const steps: ProcessStep[] = [
     {
         id: 'rdv',
-        label: 'RDV',
-        title: 'Prise de Contact & RDV',
+        label: 'Audit',
+        title: 'Audit & Diagnostic (Payant)',
         icon: <PhoneCall className="w-6 h-6" />,
-        description: 'Premier échange pour comprendre votre vision, vos besoins et les objectifs de votre projet.',
+        description: 'Séance d\'audit approfondie pour diagnostiquer vos blocages techniques et structurer votre solution. À défaut de paiement, un formulaire détaillé doit être rempli.',
         points: [
-            'Évaluation gratuite des besoins spécifiques',
-            'Définition du périmètre fonctionnel',
-            'Conseils stratégiques et techniques initiaux'
+            'Audit technique et stratégique payant',
+            'Alternative : Formulaire de description détaillé',
+            'Définition précise du MVP et des services'
         ]
     },
     {

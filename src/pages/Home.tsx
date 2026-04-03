@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout, Palette, Zap, Globe, Cpu } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Briefcase, Code, Layout, Palette, Zap, Globe, Cpu, Server } from 'lucide-react';
 import Portfolio from '../components/Portfolio';
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
@@ -33,6 +33,11 @@ const Home = () => {
             icon: <Zap className="w-6 h-6" />,
             title: "Automatisation & Bots",
             description: "Optimisation de vos processus avec des outils comme n8n et des bots personnalisés (OpenClaw)."
+        },
+        {
+            icon: <Server className="w-6 h-6" />,
+            title: "DevOps & Cloud IaC",
+            description: "Automatisation du process de dev au déploiement (CI/CD, Tests) et gestion d'infrastructure (Terraform, Ansible) sur VPS/Cloud."
         }
     ];
 
@@ -272,14 +277,36 @@ const Home = () => {
                                 <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
                                     Démarrer un Projet
                                 </h2>
-                                <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                                <p className={`text-lg max-w-2xl mx-auto mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                                     Réservez un créneau de 30 minutes pour discuter de votre projet et le structurer ensemble.
                                 </p>
+                                
+                                {/* Google Calendar Appointment Scheduling begin */}
+                                <div className="flex justify-center mb-12">
+                                    <div id="google-calendar-button"></div>
+                                    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet" />
+                                    <script 
+                                        src="https://calendar.google.com/calendar/scheduling-button-script.js" 
+                                        async 
+                                        onLoad={() => {
+                                            const target = document.getElementById('google-calendar-button');
+                                            if (target && (window as any).calendar) {
+                                                (window as any).calendar.schedulingButton.load({
+                                                    url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0U8bopkl-f_chXXiEmK2SAf6qH1E1O9JZN-rhenPk48HMHIz0xzx_cJa5Aff_UQgNODlF02E0a?gv=true',
+                                                    color: '#039BE5',
+                                                    label: 'Réserver un rendez-vous',
+                                                    target,
+                                                });
+                                            }
+                                        }}
+                                    ></script>
+                                </div>
+                                {/* end Google Calendar Appointment Scheduling */}
                             </div>
                             
                             <div className={`w-full h-[700px] rounded-3xl overflow-hidden shadow-2xl border ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
                                 <iframe 
-                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssM2lZqLpX7S_Qn6f6V_hZ5P6J3B6_G1T-Z7hZ_6U?gv=true" 
+                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0U8bopkl-f_chXXiEmK2SAf6qH1E1O9JZN-rhenPk48HMHIz0xzx_cJa5Aff_UQgNODlF02E0a?gv=true" 
                                     style={{ border: 0 }} 
                                     width="100%" 
                                     height="100%" 
