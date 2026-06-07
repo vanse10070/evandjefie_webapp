@@ -8,6 +8,8 @@ import ScrollToTop from '../components/ScrollToTop';
 import Footer from '../components/Footer';
 import Timeline from '../components/Timeline';
 import WorkProcess from '../components/WorkProcess';
+import ServicesScroll from '../components/ServicesScroll';
+import FAQ from '../components/FAQ';
 
 const Home = () => {
     const { isDark, toggleTheme } = useTheme();
@@ -151,7 +153,7 @@ const Home = () => {
 
                 <div className="relative z-10">
                     {/* Hero Section */}
-                    <div className="pt-32 pb-20 px-4">
+                    <div id="hero" className="pt-32 pb-20 px-4">
                         <div className="max-w-4xl mx-auto text-center">
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}
@@ -229,37 +231,12 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Expertise Section */}
-                    <div id="expertise" className={`py-20 px-4 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>
-                        <div className="max-w-6xl mx-auto">
-                            <h2 className={`text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                Mes Services
-                            </h2>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                                {expertise.map((exp, idx) => (
-                                    <div key={idx} className={`p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:shadow-xl'
-                                        }`}>
-                                        <div className="text-[#19a89e] mb-4">{exp.icon}</div>
-                                        <h3 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                            {exp.title}
-                                        </h3>
-                                        <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                                            {exp.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    {/* Services Section */}
+                    <ServicesScroll isDark={isDark} />
 
-                    {/* Portfolio Section */}
-                    <div id="portfolio" className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
-                        <div className="max-w-6xl mx-auto">
-                            {/* <h2 className={`text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                // Mes Réalisations
-                            </h2> */}
-                            <Portfolio isDark={isDark} />
-                        </div>
+                    {/* Realizations Section */}
+                    <div className={`${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+                        <Portfolio isDark={isDark} />
                     </div>
 
 
@@ -311,10 +288,13 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Processus de Travail */}
-                    <div id="processus">
+                    {/* Work Process Section */}
+                    <div id="process">
                         <WorkProcess isDark={isDark} />
                     </div>
+
+                    {/* FAQ Section */}
+                    <FAQ isDark={isDark} />
 
                     {/* Booking Section */}
                     <div id="book-meeting" className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
@@ -364,21 +344,7 @@ const Home = () => {
                     </div>
 
 
-                    {/* CTA Section */}
-                    <div className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h2 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-[#014a74]'}`}>
-                                Prêt à Collaborer ?
-                            </h2>
-                            <p className={`text-xl mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                Contactez-moi pour discuter de votre prochain projet
-                            </p>
-                            <a href="mailto:evanform225@gmail.com" className="bg-[#19a89e] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#148278] transition-colors inline-flex items-center">
-                                Me Contacter
-                                <Mail className="w-5 h-5 ml-2" />
-                            </a>
-                        </div>
-                    </div>
+
                 </div>
 
                 <ScrollToTop isDark={isDark} />

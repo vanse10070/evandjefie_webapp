@@ -1,7 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Palette, FileText, Zap, Scale, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+interface Project {
+  title: string;
+  category: string;
+  type: 'dev' | 'design';
+  icon: React.ElementType;
+  description: string;
+  image: string;
+  url: string;
+}
 
 interface PortfolioProps {
   isDark: boolean;
@@ -10,6 +21,7 @@ interface PortfolioProps {
 const Portfolio: React.FC<PortfolioProps> = ({ isDark }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Tous');
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -28,12 +40,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ isDark }) => {
             y: 0,
             duration: 0.7,
             stagger: 0.15,
-            ease: "power3.out",
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: projectsRef.current,
-              start: "top 85%",
-              once: true
-            }
+              start: 'top 85%',
+              once: true,
+            },
           }
         );
       }
@@ -145,43 +157,65 @@ const Portfolio: React.FC<PortfolioProps> = ({ isDark }) => {
     }
   ];
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'dev':
-        return 'from-[#19a89e] to-blue-500';
-      case 'design':
-        return 'from-[#19a89e] to-blue-500';
-      case 'devops':
-        return 'from-[#19a89e] to-blue-500';
-      default:
-        return 'from-[#19a89e] to-blue-500';
-    }
-  };
+  // Get unique categories
+  const categories = ['Tous', ...Array.from(new Set(projects.map((p) => p.category)))];
+
+  // Filter projects
+  const filteredProjects =
+    selectedCategory === 'Tous' ? projects : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="portfolio" ref={sectionRef} className={`py-20 ${
-      isDark ? 'bg-gray-800' : 'bg-white'
+    <section id="realizations" ref={sectionRef} className={`py-20 ${
+      isDark ? 'bg-gray-900' : 'bg-white'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
             isDark ? 'text-white' : 'text-[#014a74]'
           }`}>
             Mes Réalisations
           </h2>
-          <p className={`text-lg max-w-2xl mx-auto mb-6 ${
+          <p className={`text-lg max-w-2xl mx-auto mb-8 ${
             isDark ? 'text-gray-300' : 'text-gray-600'
           }`}>
-            Découvrez quelques projets que j'ai réalisés pour mes clients
+            Découvrez mes réalisations triées par catégories
           </p>
+
+          {/* Category Filters */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {categories.map((cat) => (
+              <motion.button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                whileTap={{ scale: 0.95 }}
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  selectedCategory === cat
+                    ? 'bg-[#19a89e] text-white shadow-lg'
+                    : isDark
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {cat}
+              </motion.button>
+            ))}
+          </div>
+
           <div className="w-20 h-1 bg-[#19a89e] mx-auto rounded-full"></div>
         </div>
 
         <div ref={projectsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
-            <div key={index} className={`group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 ${
-              isDark ? 'bg-gray-900 border border-gray-700' : 'bg-white'
-            }`}>
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={index}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className={`group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+              }`}>
               <div className="relative h-48 overflow-hidden">
                 <img 
                   src={project.image} 
@@ -223,7 +257,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ isDark }) => {
                   </a>
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
